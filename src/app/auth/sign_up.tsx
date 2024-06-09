@@ -1,19 +1,46 @@
-import {View, Text, TextInput,StyleSheet} from 'react-native'
-import Header from '../../components/header'
+import {View, Text, TextInput,StyleSheet,TouchableOpacity, Alert} from 'react-native'
 import Button from '../../components/button'
+import { Link ,router} from 'expo-router'
+import {useState} from 'react'
+
+const handlePress=():void=>{
+    //会員登録
+    router.push('/memo/list')
+}
 
 const SignUp=()=>{
+    const [email, setEmail] = useState('')
+    const [password,setPassword] = useState('')
     return (
         <View style={styles.container}>
-            <Header/>
             <View style={styles.inner}>
                <Text style={styles.title}>Sign Up</Text>
-               <TextInput style={styles.input} value='Email address'/>
-               <TextInput style={styles.input} value='password'/>
-               <Button Label='Submit'/>
+               <TextInput
+                style={styles.input}
+                value={email}
+                onChangeText={(text)=>{ setEmail(text)}}
+                autoCapitalize='none'
+                keyboardType='email-address'
+                placeholder='Email Address'
+                textContentType='emailAddress'
+                />
+               <TextInput
+                style={styles.input}
+                value={password}
+                onChangeText={(text)=>{ setPassword(text)}}
+                autoCapitalize='none'
+                secureTextEntry
+                placeholder='Password'
+                textContentType='password'
+                />
+               <Button Label='Submit' onPress={handlePress}/>
                <View style={styles.footer}>
                   <Text style={styles.footerText}>Allready registered?</Text>
-                  <Text style={styles.footerLink}>Log In</Text>
+                  <Link href='/auth/log_in' asChild>
+                    <TouchableOpacity>
+                      <Text style={styles.footerLink}>Log In</Text>
+                    </TouchableOpacity>
+                  </Link>
                </View>
             </View>
 

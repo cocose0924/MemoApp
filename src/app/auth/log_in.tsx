@@ -1,19 +1,50 @@
-import {View, Text, TextInput,StyleSheet} from 'react-native'
-import Header from '../../components/header'
+import {View, Text, TextInput,StyleSheet,TouchableOpacity} from 'react-native'
 import Button from '../../components/button'
 
+import { Link, router} from 'expo-router'
+import {useState} from 'react'
+
+const handlePress=():void=>{
+    //ログイン
+    router.replace('/memo/list')
+
+
+}
+
 const LogIn=()=>{
+    const [email, setEmail] = useState('')
+    const [password,setPassword] = useState('')
     return (
         <View style={styles.container}>
-            <Header/>
+            
             <View style={styles.inner}>
                <Text style={styles.title}>Log In</Text>
-               <TextInput style={styles.input} value='Email address'/>
-               <TextInput style={styles.input} value='password'/>
-               <Button Label='Submit'/>
+               <TextInput
+                style={styles.input}
+                value={email}
+                onChangeText={(text)=>{ setEmail(text)}}
+                autoCapitalize='none'
+                keyboardType='email-address'
+                placeholder='Email Address'
+                textContentType='emailAddress'
+                />
+               <TextInput
+                style={styles.input}
+                value={password}
+                onChangeText={(text)=>{ setPassword(text)}}
+                autoCapitalize='none'
+                secureTextEntry
+                placeholder='Password'
+                textContentType='password'
+                />
+               <Button Label='Submit' onPress={handlePress}/>
                <View style={styles.footer}>
                   <Text style={styles.footerText}>Not registered?</Text>
-                  <Text style={styles.footerLink}>Sing up here</Text>
+                  <Link href='/auth/sign_up' asChild>
+                    <TouchableOpacity>
+                      <Text style={styles.footerLink}>Sing up here</Text>
+                    </TouchableOpacity>
+                  </Link>
                </View>
             </View>
 
