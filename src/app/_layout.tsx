@@ -9,6 +9,8 @@ const Layout =():JSX.Element=>{
         headerTintColor: '#ffffff',
         headerTitle: 'Memo App',
         headerBackTitle: 'Back',
+        headerBackTitleVisible: true,
+        headerTitleAlign: 'center',
         headerTitleStyle:{
         fontSize: 22,
         fontWeight: 'bold'
